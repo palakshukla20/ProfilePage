@@ -67,7 +67,7 @@
           <div class= "card my-3 mt-3">
             <div class= "card-header p-3 text-center">
               <h6>BASIC INFORMATION</h6>
-              <button class= "btn card-header-icon btn-primary mr-0 ml-auto"  data-toggle= "modal" data-target= "#exampleModal">
+              <button class= "btn card-header-icon btn-primary mr-0 ml-auto"  data-toggle= "modal" data-target= "#updateModal">
                 <i class= "fas fa-edit"></i>
               </button>
             </div>
@@ -100,7 +100,7 @@
           <div class= "card my-3" >
             <div class= "card-header text-center">
               <h6>WORK</h6>
-              <button class= "btn card-header-icon mr-0 ml-auto"  data-toggle= "modal" data-target= "#updateModal">
+              <button class= "btn card-header-icon mr-0 ml-auto"  data-toggle= "modal" data-target= "#updateWorkModal">
                 <i class= "fas fa-edit"></i>
               </button>
             </div>
@@ -125,11 +125,11 @@
         </script>
       </div>
     </div>
-    <div class= "modal fade" id= "updateModal" tabindex= "-1" role= "dialog" aria-labelledby= "exampleModalLabel" aria-hidden= "true">
+    <div class= "modal fade" id= "updateModal" tabindex= "-1" role= "dialog" aria-labelledby= "basicModalLabel" aria-hidden= "true">
       <div class= "modal-dialog" role= "document">
         <div class= "modal-content">
           <div class= "modal-header">
-            <h5 class= "modal-title" id= "updateModalLabel">EDIT  DETAILS</h5>
+            <h5 class= "modal-title" id= "basicModalLabel">EDIT  DETAILS</h5>
             <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
               <span aria-hidden= "true">&times;</span>
             </button>
@@ -192,6 +192,44 @@
                   </div>
                 </div>
               </fieldset>
+            </form>
+          </div>
+          <div class= "modal-footer">
+            <button type= "button" class= "btn btn-secondary" data-dismiss= "modal">Close</button>
+            <button type= "button" type= "submit" value= "submit" class= "btn btn-primary" onclick= "updateData()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class= "modal fade" id= "updateWorkModal" tabindex= "-1" role= "dialog" aria-labelledby= "workModalLabel" aria-hidden= "true">
+      <div class= "modal-dialog" role= "document">
+        <div class= "modal-content">
+          <div class= "modal-header">
+            <h5 class= "modal-title" id= "workModalLabel">EDIT  DETAILS</h5>
+            <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
+              <span aria-hidden= "true">&times;</span>
+            </button>
+          </div>
+          <div class= "modal-body">
+            <form>
+              <div class= "form-group row">
+                <label for= "occupation" class= "col-sm-4 col-form-label">Occupation </label>
+                <div class= "col-sm-8">
+                  <input type= "text" class= "form-control" id= "occupation">
+                </div>
+              </div>
+              <div class= "form-group row">
+                <label for= "skill" class= "col-sm-4 col-form-label">skill</label>
+                <div class= "col-sm-8">
+                  <input type= "text" class= "form-control" id= "skill">
+                </div>
+              </div>
+              <div class= "form-group row">
+                <label for= "job" class= "col-sm-4 col-form-label">job</label>
+                <div class="col-sm-8">
+                  <input type= "text" class= "form-control" id= "job">
+                </div>
+              </div>
             </form>
           </div>
           <div class= "modal-footer">
