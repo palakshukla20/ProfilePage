@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src= "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity= "sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src= "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity= "sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity= "sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <meta name= "viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+  <link rel= "stylesheet" href= "main.css">
+</head>
+<body class= "container-fluid" onload= "load(this, 'about')">
+  <header id= "navbar"></header>
+  <section class= "my-5 mb-5">
+    <div class= "section-head">
+      <h2>Profile Social</h2>
+    </div>
+    <div class= "row">
+      <div class= "col-xs-12 col-sm-12 col-md-12 background-img">
+        <img src= "hero-img.jpg">
+      </div>
+      <div  class= "body-left col-xs-5 col-sm-4 col-md-4 col-lg-3">
+        <div class= "card profile-card">
+          <div class= "card-header profile-image mb-1 border-0 text-center">
+            <img src= "profile.jpg">
+          </div>  
+          <div class= "card-body text-center mb-2">
+            <h5>Name</h5>
+            <h6>title</h6>
+            <div class= "social-details mt-4 d-flex justify-content-around ">
+              <div class= "">
+                <h6>222</h6>
+                <span>Following</span>
+              </div>
+              <div class= "">
+                <h6>323</h6>
+                <span>Followers</span>
+              </div>
+              <div class= >
+                <h6>231</h6>
+                <span>Activities</span>
+              </div>
+            </div>
+          </div>
+          <div class= "col-sm-12 card-footer border-0" style= " background-color: white;">
+            <div class= "add-btn text-center" >
+              <button class= "btn btn-sm"><i class="fas fa-user px-1"></i>  ADD AS FRIEND</button>
+            </div>
+          </div>
+        </div>
+        <div class= "card my-3">
+          <div class= "card-header p-3 text-center">
+            <h6>WHO TO FOLLOW</h6>
+          </div>
+          <div class= "follow-card card-body">
+          </div>
+        </div>
+      </div>
+      <div class= "basic-info col-xs-6 col-sm-8 col-md-8 col-lg-9  mr-0 ml-0" >
+        <div id= "body-nav"></div>
+        <div id= "load-template"></div>
+        <script id= "template" type= "text/template">
+          {{#result}}
+          <div class= "card my-3 mt-3">
+            <div class= "card-header p-3 text-center">
+              <h6>BASIC INFORMATION</h6>
+              <button class= "btn card-header-icon btn-primary mr-0 ml-auto"  data-toggle= "modal" data-target= "#exampleModal">
+                <i class= "fas fa-edit"></i>
+              </button>
+            </div>
+            <div class="card-body" id="card-body">
+              <table class= "table table-borderless">
+                <tr>
+                  <th >Full Name</th>
+                  <td>{{name}}</td>
+                </tr>
+                <tr>
+                  <th >Gender</th>
+                  <td>{{gender}}</td>
+                </tr>
+                <tr>
+                  <th>Birthday Date</th>
+                  <td>{{date}}</td>
+                </tr>
+                <tr>
+                  <th >Martial Status</th>
+                  <td>{{status}}</td>
+                </tr>
+                <tr>
+                  <th>Location</th>
+                  <td>{{location}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <hr class= "divider">
+          <div class= "card my-3" >
+            <div class= "card-header text-center">
+              <h6>WORK</h6>
+              <button class= "btn card-header-icon mr-0 ml-auto"  data-toggle= "modal" data-target= "#updateModal">
+                <i class= "fas fa-edit"></i>
+              </button>
+            </div>
+            <div class= "card-body">
+              <table class= "table table-borderless">
+                <tr>
+                  <th class= "w-25">Occupation</th>
+                  <td>{{occupation}}{{^occupation}}Not Mentioned{{/occupation}}</td>
+                </tr>
+                <tr>
+                  <th class= "w-25">Skills</th>
+                  <td>{{skill}}{{^skill}}Not Mentioned{{/skill}}</td>
+                </tr>
+                <tr>
+                  <th class= "w-25">Jobs</th>
+                  <td>{{job}}{{^job}}Not Mentioned{{/job}} </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          {{/result}}
+        </script>
+      </div>
+    </div>
+    <div class= "modal fade" id= "updateModal" tabindex= "-1" role= "dialog" aria-labelledby= "exampleModalLabel" aria-hidden= "true">
+      <div class= "modal-dialog" role= "document">
+        <div class= "modal-content">
+          <div class= "modal-header">
+            <h5 class= "modal-title" id= "updateModalLabel">EDIT  DETAILS</h5>
+            <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
+              <span aria-hidden= "true">&times;</span>
+            </button>
+          </div>
+          <div class= "modal-body">
+            <form>
+              <div class= "form-group row">
+                <label for= "name" class= "col-sm-4 col-form-label">Full Name </label>
+                <div class= "col-sm-8">
+                  <input type= "text" class= "form-control" id= "name" placeholder= "name">
+                </div>
+              </div>
+              <div class= "form-group row">
+                <label for= "date" class= "col-sm-4 col-form-label">Birthday Date </label>
+                <div class= "col-sm-8">
+                  <input type= "date" class= "form-control" id= "date">
+                </div>
+              </div>
+              <div class= "form-group row">
+                <label for= "location" class= "col-sm-4 col-form-label">Location</label>
+                <div class="col-sm-8">
+                  <input type= "text" class= "form-control" id= "location">
+                </div>
+              </div>
+              <fieldset class="form-group">
+                <div class= "row">
+                  <legend class= "col-form-label col-sm-4 pt-0">Gender</legend>
+                  <div class= "col-sm-7">
+                    <div class= "form-check">
+                      <input class= "form-check-input" type= "radio" name= "gridRadios" id= "male" value= "Male">
+                      <label class= "form-check-label" for= "male">
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class= "form-check-input" type= "radio" name= "gridRadios" id= "female" value= "Female">
+                      <label class= "form-check-label" for= "female">
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="form-group">
+                <div class= "form-group row">
+                  <div class= "col-sm-4">Martial Status</div>
+                  <div class= "col-sm-7">
+                    <div class= "form-check">
+                      <input class= "form-check-input" type= "radio" id= "married" name= "gridRadios">
+                      <label class= "form-check-label" for= "married">
+                        Married
+                      </label>
+                    </div>
+                    <div class= "form-check">
+                      <input class= "form-check-input" type= "radio" id="unmarried" name= "gridRadios">
+                      <label class= "form-check-label" for= "unmarried">
+                        Unmarried
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class= "modal-footer">
+            <button type= "button" class= "btn btn-secondary" data-dismiss= "modal">Close</button>
+            <button type= "button" type= "submit" value= "submit" class= "btn btn-primary" onclick= "updateData()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src= "index.js"></script>
+</body>
+</html>
