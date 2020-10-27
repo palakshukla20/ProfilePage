@@ -13,84 +13,90 @@
   <link rel= "stylesheet" href= "main.css">
 </head>
 <body class= "container-fluid"  onload= "load(this, 'friend')">
-<header id= "navbar"></header>
-<section class= "section my-5 mb-5">
-  <div class= "section-head">
-    <h2>Profile Social</h2>
-  </div>
-  <div class= "row">
-    <div class= "col-xs-12 col-sm-12 col-md-12 background-img">
-      <img src= "hero-img.jpg">
+  <header id= "navbar"></header>
+  <section class= "section my-5 mb-5">
+    <div class= "section-head">
+      <h2>Profile Social</h2>
     </div>
-    <div  class= "body-left col-xs-5 col-sm-4 col-md-4 col-lg-3">
-      <div class= "card profile-card">
-        <div class= "card-header profile-image mb-1 border-0 text-center">
-          <img src= "profile.jpg">
-        </div>  
-        <div class= "card-body text-center mb-2">
-          <h5>Name</h5>
-          <h6>title</h6>
-          <div class= "social-details mt-4 d-flex justify-content-around ">
-            <div>
-              <h6>222</h6>
-              <span>Following</span>
-            </div>
-            <div>
-              <h6>323</h6>
-              <span>Followers</span>
-            </div>
-            <div>
-              <h6>231</h6>
-              <span>Activities</span>
-            </div>
-          </div>
+    <div class= "row" id= "load-template"></div> 
+    <script id= "template" type= "text/template">
+      {{#result}}
+        <div class= "col-xs-12 col-sm-12 col-md-12 background-img">
+          <img src= "hero-img.jpg">
         </div>
-        <div class= "col-sm-12 card-footer border-0" style= "background-color: white;">
-          <div class= "add-btn text-center" >
-            <button class= "btn btn-sm" onclick= "addFriend()"><i class= "fas fa-user px-1"></i>ADD AS FRIEND</button>
-          </div>
-        </div>
-      </div>
-      <div class= "follow-card card my-3">
-        <div class= "card-header p-3 text-center">
-          <h6>WHO TO FOLLOW</h6>
-        </div>
-        <div class= "card-body">
-        </div>
-      </div>
-    </div>
-    <div class= "col-xs-6 col-sm-8 col-md-8 col-lg-9  mr-0 ml-0">
-      <div id= "body-nav"></div>
-      <div  id= "load-template"></div>
-      <script id= "template" type= "text/template">
-        {{#result}}
-        <div class= "row ml-0 mr-0 mt-4">
-          <div class= "col-md-12 col-lg-6 px-0">
-            <div class= "friend-media-img media p-3">  
-              <img class= "align-self-left" src= "profile-girl.png" alt= "image">
-              <div class= "media-body my-4 ml-4">
-                <h5 class= "mt-0">{{name}}</h5>
-                <p>{{job}}</p>
+        <div  class= "body-left col-xs-5 col-sm-4 col-md-4 col-lg-3">
+          <div class= "card profile-card">
+            <img class= "profile-sm-image" src = {{profileImage}}{{^profileImage}}{{defaultImage}}{{/profileImage}}>
+            <div class= "card-header profile-image mb-1 border-0 text-center">
+              <img src = {{profileImage}}{{^profileImage}}{{defaultImage}}{{/profileImage}}>
+            </div> 
+            <div class= "card-body text-center mb-2">
+              <h5>{{name}}</h5>
+              <h6>{{title}}{{^title}}{{/title}}</h6>
+              <div class= "social-details mt-4 d-flex justify-content-around ">
+                <div>
+                  <h6>{{following}}{{^following}}0{{/following}}</h6>
+                  <span>Friend</span>
+                </div>
+                <div>
+                  <h6>{{activity}}{{^activity}}0{{/activity}}</h6>
+                  <span>Activities</span>
+                </div>
               </div>
-              <div class= "float-right"><i class= "fa fa-ellipsis-v" aria-hidden= "true"></i></div>
+            </div>
+            <div class= "col-sm-12 card-footer border-0">
+              <div class= "add-btn text-center" >
+                <button class= "btn btn-sm" onclick= "showfriend()"><i class= "fas fa-user px-1"></i>ADD AS FRIEND</button>
+              </div>
             </div>
           </div>
-          <div class= "col-md-12 col-lg-6 px-0">
-            <div class= "friend-media-img media p-3">  
-              <img class= "align-self-left" src= "profile-girl.png" alt= "image">
-              <div class= "media-body my-4 ml-4">
-                <h5 class= "mt-0">{{name}}</h5>
-                <p>{{job}}</p>
-              </div>
-              <div class= "float-right"><i class= "fa fa-ellipsis-v" aria-hidden= "true"></i></div>
+          <div class= "follow-card card my-3" style= "display:none">
+            <div class= "card-header p-3 text-center">
+              <h6>ADD FRIEND</h6>
             </div>
-          </div>  
+            <div class= "add-friend card-body p-1">
+              <div class= "add-friend"></div>
+            </div>
+          </div>
         </div>
-        {{/result}}
-      </script>
-    </div>
-  </div>
-</section>
-<script src= "index.js"></script>
+        <div class= "col-xs-6 col-sm-8 col-md-8 col-lg-9  mr-0 ml-0">
+          <div id= "body-nav"></div>
+            <div class= "row ml-0 mr-0 mt-4">
+              {{#friend}}
+              <div class= "col-md-12 col-lg-6 px-0">
+                <div class= "friend-media-img media p-3">  
+                  <img class= "align-self-left" alt= "image" src='#'>
+                  <div class= "media-body my-4 ml-4">
+                    <h5 class= "mt-0">{{friendName}}{{^friendName}}Not mentioned{{/friendName}}</h5>
+                    <p>{{friendJob}}{{^friendJob}}Not mentioned{{/friendJob}}</p>
+                  </div>
+                  <div class= "float-right"><i class= "fa fa-ellipsis-v" aria-hidden= "true"></i></div>
+                </div>
+              </div>
+              {{/friend}}{{^friend}}<div class = "card text-center"><div class= "no-data card-body p-5">No friend yet</div></div>{{/friend}}  
+            </div>
+          </div>
+        </div>
+      {{/result}}
+    </script>
+    <script id= "friend-template" type= "text/template">
+      {{#add-friend}}
+        <div class= "add-friend-img media p-2">  
+          <img class= "align-self-left" src= "profile-girl.png" alt= "image">
+          <div class= "media-body my-4 ml-4">
+            <h5 class= "mt-0">{{name}}</h5>
+            <p>{{title}}</p>
+          </div>
+          <button class= "float-right" id= "friend-Dropdown" role= "button" data-toggle= "dropdown" aria-haspopup= "true" aria-expanded= "false">
+            <i class= "fa fa-ellipsis-v" aria-hidden= "true"></i>
+          </button>
+          <div class= "dropdown-menu" aria-labelledby= "navbarDropdown" style= "right: -10;">
+            <a class= "dropdown-item" href= "#" onclick= "addNewFriend(this)" id= {{email}}>Add Friend</a>
+          </div>
+        </div>
+      {{/add-friend}}
+    </script>
+  </section>
+  <script src= "index.js"></script>
 </body>
 </html>

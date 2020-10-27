@@ -1,45 +1,19 @@
 <header id= "header">
   <nav class= "navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class= "logo">
+    <div class= "logo ml-2">
       <a class= "navbar-brand" href="#">Able</a>
     </div>
-    <button class= "navbar-toggler" type= "button" data-toggle= "collapse" data-target= "#navbarSupportedContent" aria-controls= "navbarSupportedContent" aria-expanded= "false" aria-label= "Toggle navigation">
-      <span class= "navbar-toggler-icon"></span>
-    </button>
-    <div class= "collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class= "navbar-nav ml-auto">
-        <li>
-          <form class= "form-inline my-2 my-lg-0">
-            <button class= "btn btn-outline-success my-2 my-sm-0" type= "submit"><i class= "fas fa-search"></i></button>
-          </form>
-        </li>
-        <li class= "nav-item">
-          <a class= "nav-link" href="#"><i class="far fa-bell"></i></a>
-        </li>
-        <li class= "nav-item">
-          <a class= "nav-link" href="#"><i class="far fa-comments"></i></a>
-        </li>
-        <li class= "nav-item">
-          <a class= "nav-link" href="#"><i class="fas fa-expand-arrows-alt"></i></a>
-        </li>
-        <li class= "nav-item dropdown">
-          <a class= "nav-link" href="#" id= "navbarDropdown" role= "button" data-toggle= "dropdown" aria-haspopup= "true" aria-expanded= "false">
-          <img src= "avatar-1.png" style="width: 12%"><span>Name</span><i class= "fas fa-angle-down"></i>
-          </a>
-          <div class= "dropdown-menu" aria-labelledby= "navbarDropdown" style= "right: -10;">
-            <a class= "dropdown-item" href= "#" onclick= "isLogout()">Logout</a>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <button class= "btn logout ml-auto  mr-2" type= "button" onclick= "isLogout()">Logout</button>
   </nav>
 </header>
 
-<div class= "profile-inner-nav" id= "body-right-nav">
+<div class= "profile-inner-nav" id= "body-right-nav" >
   <ul class= "profile-inner-nav-list list-unstyled d-flex justify-content-around mb-0">
-    <li class= "list-item py-2 active" id= "timeline"><a href= "timeline.html">Timeline</a></li>
+    <li class= "list-item  py-2 active" id= "timeline"><a href= "timeline.html">Timeline</a></li>
     <li class= "list-item py-2" id= "about"><a  href= "about.html">About</a></li>
-    <li class= "list-item py-2" id= "photos"><a href= "photos.html">Photos</a></li>
+    <li class= "list-item  py-2" id= "photos"><a href= "photos.html">Photos</a></li>
     <li class= "list-item py-2" id= "friend"><a href= "friend.html">Friends</a></li>
   </ul>
 </div>
+
+

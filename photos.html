@@ -18,87 +18,78 @@
     <div class= "section-head">
       <h2>Profile Social</h2>
     </div>
-    <div class= "row">
-      <div class= "col-xs-12 col-sm-12 col-md-12 background-img">
-        <img src= "hero-img.jpg">
-      </div>
-      <div  class= "body-left col-xs-5 col-sm-4 col-md-4 col-lg-3">
-        <div class= "card profile-card">
-          <div class= "card-header profile-image mb-1 border-0 text-center">
-            <img src= "profile.jpg">
-          </div>  
-          <div class= "card-body text-center mb-2">
-            <h5>Name</h5>
-            <h6>title</h6>
-            <div class= "social-details mt-4 d-flex justify-content-around ">
-              <div>
-                <h6>222</h6>
-                <span>Following</span>
+    <div class= "row" id= "load-template"></div> 
+    <script id= "template" type= "text/template">
+      {{#result}}
+        <div class= "col-xs-12 col-sm-12 col-md-12 background-img">
+          <img src= "hero-img.jpg">
+        </div>
+        <div  class= "body-left col-xs-5 col-sm-4 col-md-4 col-lg-3">
+          <div class= "card profile-card">
+            <img class= "profile-sm-image" src = {{profileImage}}{{^profileImage}}{{defaultImage}}{{/profileImage}}>
+            <div class= "card-header profile-image mb-1 border-0 text-center">
+              <img src = {{profileImage}}{{^profileImage}}{{defaultImage}}{{/profileImage}}>
+            </div> 
+            <div class= "card-body text-center mb-2">
+              <h5>{{name}}</h5>
+              <h6>{{title}}{{^title}}{{/title}}</h6>
+              <div class= "social-details mt-4 d-flex justify-content-around ">
+                <div>
+                  <h6>{{following}}{{^following}}0{{/following}}</h6>
+                  <span>Friend</span>
+                </div>
+                <div>
+                  <h6>{{activity}}{{^activity}}0{{/activity}}</h6>
+                  <span>Activities</span>
+                </div>
               </div>
-              <div>
-                <h6>323</h6>
-                <span>Followers</span>
-              </div>
-              <div>
-                <h6>231</h6>
-                <span>Activities</span>
+            </div>
+            <div class= "col-sm-12 card-footer border-0">
+              <div class= "add-btn text-center" >
+                <button class= "btn btn-sm" data-toggle= "modal" data-target= "#updateGallery"><i class="fas fa-user px-1"></i>  ADD Photo</button>
               </div>
             </div>
           </div>
-          <div class= "col-sm-12 card-footer border-0" style= " background-color: white;">
-            <div class= "add-btn text-center" >
-              <button class= "btn btn-sm"><i class="fas fa-user px-1"></i>  ADD AS FRIEND</button>
+        </div>  
+        <div class= "col-xs-6 col-sm-8 col-md-8 col-lg-9  mr-0 ml-0">
+          <div id= "body-nav"></div>
+          {{#photo}}
+            <div class= "photos row ml-0 mr-0 mt-4" style= "background: white;">  
+              <div class= "d-flex flex-wrap p-2">
+                <div class= "gallery p-2">
+                  <img src= {{photoUrl}}>
+                </div>
+              </div>
             </div>
+            {{/photo}}
           </div>
         </div>
-        <div class= "card my-3">
-          <div class= "card-header p-3 text-center">
-            <h6>WHO TO FOLLOW</h6>
+      {{/result}}
+    </script>
+    <div class= "modal fade" id= "updateGallery" tabindex= "-1" role= "dialog" aria-labelledby= "basicModalLabel" aria-hidden= "true" >
+      <div class= "modal-dialog" role= "document">
+        <div class= "modal-content">
+          <div class= "modal-header">
+            <h5 class= "modal-title" id= "basicModalLabel">Upload Photo</h5>
+            <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
+              <span aria-hidden= "true">&times;</span>
+            </button>
           </div>
-          <div class= "card-body">
+          <div class= "modal-body">
+            <form>
+              <div class= "form-group row">
+                <label for= "profileImage" class= "col-sm-4 col-form-label">Upload Photo</label>
+                <div class= "col-sm-8">
+                  <input type= "file" class= "form-control" id= "photo" accept=".jpg, .jpeg, .png">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class= "modal-footer">
+            <button type= "button" class= "btn btn-secondary" data-dismiss= "modal">Close</button>
+            <button type= "button" type= "submit" value= "submit" class= "btn btn-primary" onclick= "addPhoto()">Save changes</button>
           </div>
         </div>
-      </div>
-      <div class= "col-xs-6 col-sm-8 col-md-8 col-lg-9  mr-0 ml-0">
-        <div id= "body-nav"></div>
-        <div id= "load-template"></div>
-        <script id= "template" type= "text/template">
-        {{#result}}
-          <div class= "photos row ml-0 mr-0 mt-4" style= "background: white;">  
-            <div class= "d-flex flex-wrap p-2">
-              <div class= "gallery p-2">
-                <img src= "profile-girl.png">
-              </div>
-              <div class= " gallery p-2">
-                <img src= "profile-girl.png">
-              </div>
-              <div class= "gallery p-2">
-                <img src= "avatar-1.png">
-              </div>
-              <div class= "gallery p-2">
-                <img src= "profile-girl.png">
-              </div>
-              <div class= "gallery p-2">
-                <img src= "profile-girl.png">
-              </div><div class= "gallery p-2">
-                <img src= "profile-girl.png">
-              </div>
-              <div class= "gallery p-2">
-                <img src= "profile-girl.png">
-              </div>
-              <div class= "gallery p-2">
-                <img src= "profile-girl.png">
-              </div>
-              <div class= "gallery p-2">
-                <img src= "profile-girl.png">
-              </div>
-              <div class= "gallery p-2">
-                <img src= "profile-girl.png">
-              </div>
-            </div>
-          </div>
-          {{/result}}
-        </script>
       </div>
     </div>
   </section>

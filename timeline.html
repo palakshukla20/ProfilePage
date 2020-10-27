@@ -8,58 +8,116 @@
   <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <meta name= "viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel= "stylesheet" href= "main.css">
 </head>
-<body class= "container-fluid">
+<body class= "container-fluid" onload= "load(this, 'timeline')">
 <header id= "navbar"></header>
 <section class= "section my-5 mb-5">
   <div class= "section-head">
     <h2>Profile Social</h2>
   </div>
-  <div class= "row">
-    <div class= "col-xs-12 col-sm-12 col-md-12 background-img">
-      <img src= "hero-img.jpg">
-    </div>
-    <div  class= "body-left col-xs-5 col-sm-4 col-md-4 col-lg-3">
-      <div class= "card profile-card">
-        <div class= "card-header profile-image mb-1 border-0 text-center">
-          <img src= "profile.jpg">
-        </div>  
-        <div class= "card-body text-center mb-2">
-          <h5>Name</h5>
-          <h6>title</h6>
-          <div class= "social-details mt-4 d-flex justify-content-around ">
-            <div class= "">
-              <h6>222</h6>
-              <span>Following</span>
+  <div class= "row" id= "load-template"></div> 
+  <script id= "template" type= "text/template">
+    {{#result}}
+      <div class= "col-xs-12 col-sm-12 col-md-12 background-img">
+        <img src= "hero-img.jpg">
+      </div>
+      <div  class= "body-left col-xs-5 col-sm-4 col-md-4 col-lg-3">
+        <div class= "card profile-card">
+          <img class= "profile-sm-image" src = {{profileImage}}{{^profileImage}}{{defaultImage}}{{/profileImage}}>
+          <div class= "card-header profile-image mb-1 border-0 text-center">
+            <img src = {{profileImage}}{{^profileImage}}{{defaultImage}}{{/profileImage}}>
+          </div> 
+          <div class= "card-body text-center mb-2">
+            <h5>{{name}}</h5>
+            <h6>{{title}}{{^title}}{{/title}}</h6>
+            <div class= "social-details mt-4 d-flex justify-content-around ">
+              <div>
+                <h6>{{following}}{{^following}}0{{/following}}</h6>
+                <span>Friend</span>
+              </div>
+              <div>
+                <h6>{{activity}}{{^activity}}0{{/activity}}</h6>
+                <span>Activities</span>
+              </div>
             </div>
-            <div class= "">
-              <h6>323</h6>
-              <span>Followers</span>
-            </div>
-            <div class= >
-              <h6>231</h6>
-              <span>Activities</span>
+          </div>
+          <div class= "col-sm-12 card-footer border-0">
+            <div class= "add-btn text-center" >
+              <button class= "btn btn-sm"  data-toggle= "modal" data-target= "#updatePost"><i class="fas fa-user px-1"></i>  ADD POST</button>
             </div>
           </div>
         </div>
-        <div class= "col-sm-12 card-footer border-0" style= " background-color: white;">
-          <div class= "add-btn text-center" >
-            <button class= "btn btn-sm"><i class="fas fa-user px-1"></i>  ADD AS FRIEND</button>
-          </div>
+      </div>
+      <div class= "col-xs-6 col-sm-8 col-md-8 col-lg-9  mr-0 ml-0">
+        <div id= "body-nav"></div>
+        <div class= "row ml-0 mr-0 mt-4">
+          <ul class= "col-12 timeline list-unstyled">
+            {{#post}}
+            <li style= "position: relative">
+              <div class= "card my-4" style= "background-color: white;">
+                <div class= "post-stripe-image">
+                </div>
+                <div class= "stripe"></div>
+                <div class= "card-header b-0 ">
+                <div class= "ml-0 mr-auto">
+                  <h6>{{name}}  Posted on Timeline</h6> 
+                  at <span class= "mx-2">{{date}}</span>
+                </div>
+                  <div class= "mr-0 ml-auto"><i class= "fa fa-ellipsis-v" aria-hidden= "true"></i></div> 
+                </div>
+                <div class= "card-body p-0">
+                  <div class= "post-image my-2">{{#postImage}} <img src= {{postImage}}>{{/postImage}}{{^postImage}}{{/postImage}}
+                    <div class= "post-body-text mx-4 my-1">
+                      <p>{{postText}}</p>  
+                    </div>
+                  </div>
+                </div>  
+                <div class= "card-footer d-flex flex-row bd-highlight mb-3">
+                  <div><i class="fas fa-heart mx-2"></i>Like<span></span></div><div class="vertical-line mx-3"></div>
+                  <div><i class="fas fa-comment-alt mx-2"></i>Comments<span></span></div><div class="vertical-line mx-3"></div>
+                  <div><i class="fa fa-share-alt mx-2" aria-hidden="true"></i>Share <span></span></div>
+                </div>
+              </div>
+            </li>
+            {{/post}}{{^post}}<div class = "card text-center"><div class= "no-data card-body p-5">No Post yet</div></div>{{/post}}
+          </ul>
         </div>
       </div>
-      <div class= "follow-card card my-3">
-        <div class= "card-header p-3 text-center">
-          <h6>WHO TO FOLLOW</h6>
+    {{/result}}
+  </script>
+  <div class= "modal fade" id= "updatePost" tabindex= "-1" role= "dialog" aria-labelledby= "postLabel" aria-hidden= "true" >
+    <div class= "modal-dialog" role= "document">
+      <div class= "modal-content">
+        <div class= "modal-header">
+          <h5 class= "modal-title" id= "postLabel">Add Post</h5>
+          <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
+            <span aria-hidden= "true">&times;</span>
+          </button>
         </div>
-        <div class="card-body">
+        <div class= "modal-body">
+          <form>
+            <div class= "form-group row">
+              <label for= "post-image" class= "col-sm-4 col-form-label">Image</label>
+              <div class= "col-sm-8">
+                <input type= "file" class= "form-control" id= "post-image" accept=".jpg, .jpeg, .png">
+              </div>
+            </div>
+            <div class= "form-group row">
+              <label for= "post-text" class= "col-sm-4 col-form-label">Post body</label>
+              <div class= "col-sm-8">
+                <input type= "text" class= "form-control" id= "post-text">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class= "modal-footer">
+          <button type= "button" class= "btn btn-secondary" data-dismiss= "modal">Close</button>
+          <button type= "button" type= "submit" value= "submit" class= "btn btn-primary" onclick= "addPost()">Add Post</button>
         </div>
       </div>
-    </div>
-    <div class= "col-xs-6 col-sm-8 col-md-8 col-lg-9  mr-0 ml-0">
-      <div id= "body-nav"></div>
     </div>
   </div>
 </section>

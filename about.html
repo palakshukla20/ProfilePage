@@ -13,6 +13,9 @@
   <link rel= "stylesheet" href= "main.css">
 </head>
 <body class= "container-fluid" onload= "load(this, 'about')">
+  <div  id= "load-template"></div> 
+<script id= "template" type= "text/template">
+  {{#result}}
   <header id= "navbar"></header>
   <section class= "my-5 mb-5">
     <div class= "section-head">
@@ -24,50 +27,36 @@
       </div>
       <div  class= "body-left col-xs-5 col-sm-4 col-md-4 col-lg-3">
         <div class= "card profile-card">
+          <img class= "profile-sm-image" src = {{profileImage}}{{^profileImage}}{{defaultImage}}{{/profileImage}}>
           <div class= "card-header profile-image mb-1 border-0 text-center">
-            <img src= "profile.jpg">
-          </div>  
+            <img src = {{profileImage}}{{^profileImage}}{{defaultImage}}{{/profileImage}}>
+          </div> 
           <div class= "card-body text-center mb-2">
-            <h5>Name</h5>
-            <h6>title</h6>
+            <h5>{{name}}</h5>
+            <h6>{{title}}{{^title}}{{/title}}</h6>
             <div class= "social-details mt-4 d-flex justify-content-around ">
-              <div class= "">
-                <h6>222</h6>
-                <span>Following</span>
+              <div>
+                <h6>{{following}}{{^following}}{{/following}}</h6>
+                <span>Friend</span>
               </div>
-              <div class= "">
-                <h6>323</h6>
-                <span>Followers</span>
-              </div>
-              <div class= >
-                <h6>231</h6>
+              <div>
+                <h6>{{activity}}{{^activity}}0{{/activity}}</h6>
                 <span>Activities</span>
               </div>
             </div>
           </div>
-          <div class= "col-sm-12 card-footer border-0" style= " background-color: white;">
+          <div class= "col-sm-12 card-footer border-0">
             <div class= "add-btn text-center" >
-              <button class= "btn btn-sm"><i class="fas fa-user px-1"></i>  ADD AS FRIEND</button>
             </div>
           </div>
         </div>
-        <div class= "card my-3">
-          <div class= "card-header p-3 text-center">
-            <h6>WHO TO FOLLOW</h6>
-          </div>
-          <div class= "follow-card card-body">
-          </div>
-        </div>
-      </div>
+      </div> 
       <div class= "basic-info col-xs-6 col-sm-8 col-md-8 col-lg-9  mr-0 ml-0" >
         <div id= "body-nav"></div>
-        <div id= "load-template"></div>
-        <script id= "template" type= "text/template">
-          {{#result}}
           <div class= "card my-3 mt-3">
             <div class= "card-header p-3 text-center">
               <h6>BASIC INFORMATION</h6>
-              <button class= "btn card-header-icon btn-primary mr-0 ml-auto"  data-toggle= "modal" data-target= "#updateModal">
+              <button class= "btn card-header-icon btn-primary mr-0 ml-auto"  data-toggle= "modal" data-target= "#updateModal" onclick= "getUserPrevInfo()">
                 <i class= "fas fa-edit"></i>
               </button>
             </div>
@@ -86,7 +75,7 @@
                   <td>{{date}}</td>
                 </tr>
                 <tr>
-                  <th >Martial Status</th>
+                  <th>Martial Status</th>
                   <td>{{status}}</td>
                 </tr>
                 <tr>
@@ -100,7 +89,7 @@
           <div class= "card my-3" >
             <div class= "card-header text-center">
               <h6>WORK</h6>
-              <button class= "btn card-header-icon mr-0 ml-auto"  data-toggle= "modal" data-target= "#updateWorkModal">
+              <button class= "btn card-header-icon mr-0 ml-auto"  data-toggle= "modal" data-target= "#updateWorkModal" onclick= "getUserPrevInfo()">
                 <i class= "fas fa-edit"></i>
               </button>
             </div>
@@ -121,125 +110,138 @@
               </table>
             </div>
           </div>
-          {{/result}}
-        </script>
-      </div>
-    </div>
-    <div class= "modal fade" id= "updateModal" tabindex= "-1" role= "dialog" aria-labelledby= "basicModalLabel" aria-hidden= "true">
-      <div class= "modal-dialog" role= "document">
-        <div class= "modal-content">
-          <div class= "modal-header">
-            <h5 class= "modal-title" id= "basicModalLabel">EDIT  DETAILS</h5>
-            <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
-              <span aria-hidden= "true">&times;</span>
-            </button>
-          </div>
-          <div class= "modal-body">
-            <form>
-              <div class= "form-group row">
-                <label for= "name" class= "col-sm-4 col-form-label">Full Name </label>
-                <div class= "col-sm-8">
-                  <input type= "text" class= "form-control" id= "name" placeholder= "name">
-                </div>
-              </div>
-              <div class= "form-group row">
-                <label for= "date" class= "col-sm-4 col-form-label">Birthday Date </label>
-                <div class= "col-sm-8">
-                  <input type= "date" class= "form-control" id= "date">
-                </div>
-              </div>
-              <div class= "form-group row">
-                <label for= "location" class= "col-sm-4 col-form-label">Location</label>
-                <div class="col-sm-8">
-                  <input type= "text" class= "form-control" id= "location">
-                </div>
-              </div>
-              <fieldset class="form-group">
-                <div class= "row">
-                  <legend class= "col-form-label col-sm-4 pt-0">Gender</legend>
-                  <div class= "col-sm-7">
-                    <div class= "form-check">
-                      <input class= "form-check-input" type= "radio" name= "male" id= "male" value= "Male">
-                      <label class= "form-check-label" for= "male">
-                        Male
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class= "form-check-input" type= "radio" name= "female" id= "female" value= "Female">
-                      <label class= "form-check-label" for= "female">
-                        Female
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset class="form-group">
-                <div class= "form-group row">
-                  <div class= "col-sm-4">Martial Status</div>
-                  <div class= "col-sm-7">
-                    <div class= "form-check">
-                      <input class= "form-check-input" type= "radio" id= "married" name= "married">
-                      <label class= "form-check-label" for= "married">
-                        Married
-                      </label>
-                    </div>
-                    <div class= "form-check">
-                      <input class= "form-check-input" type= "radio" id="unmarried" name= "unmarried">
-                      <label class= "form-check-label" for= "unmarried">
-                        Unmarried
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-          <div class= "modal-footer">
-            <button type= "button" class= "btn btn-secondary" data-dismiss= "modal">Close</button>
-            <button type= "button" type= "submit" value= "submit" class= "btn btn-primary" onclick= "updateData()">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class= "modal fade" id= "updateWorkModal" tabindex= "-1" role= "dialog" aria-labelledby= "workModalLabel" aria-hidden= "true">
-      <div class= "modal-dialog" role= "document">
-        <div class= "modal-content">
-          <div class= "modal-header">
-            <h5 class= "modal-title" id= "workModalLabel">EDIT  DETAILS</h5>
-            <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
-              <span aria-hidden= "true">&times;</span>
-            </button>
-          </div>
-          <div class= "modal-body">
-            <form>
-              <div class= "form-group row">
-                <label for= "occupation" class= "col-sm-4 col-form-label">Occupation </label>
-                <div class= "col-sm-8">
-                  <input type= "text" class= "form-control" id= "occupation">
-                </div>
-              </div>
-              <div class= "form-group row">
-                <label for= "skill" class= "col-sm-4 col-form-label">skill</label>
-                <div class= "col-sm-8">
-                  <input type= "text" class= "form-control" id= "skill">
-                </div>
-              </div>
-              <div class= "form-group row">
-                <label for= "job" class= "col-sm-4 col-form-label">job</label>
-                <div class="col-sm-8">
-                  <input type= "text" class= "form-control" id= "job">
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class= "modal-footer">
-            <button type= "button" class= "btn btn-secondary" data-dismiss= "modal">Close</button>
-            <button type= "button" type= "submit" value= "submit" class= "btn btn-primary" onclick= "updateData()">Save changes</button>
-          </div>
         </div>
       </div>
     </div>
   </section>
-  <script src= "index.js"></script>
+{{/result}}
+</script> 
+<div class= "modal fade" id= "updateModal" tabindex= "-1" role= "dialog" aria-labelledby= "basicModalLabel" aria-hidden= "true" >
+  <div class= "modal-dialog" role= "document">
+    <div class= "modal-content">
+      <div class= "modal-header">
+        <h5 class= "modal-title" id= "basicModalLabel">EDIT  DETAILS</h5>
+        <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
+          <span aria-hidden= "true">&times;</span>
+        </button>
+      </div>
+      <div class= "modal-body">
+        <form>
+          <div class= "form-group row">
+            <label for= "profileImage" class= "col-sm-4 col-form-label">Image</label>
+            <div class= "col-sm-8">
+              <input type= "file" class= "form-control" id= "profile-image" accept=".jpg, .jpeg, .png">
+            </div>
+          </div>
+          <div class= "form-group row">
+            <label for= "name" class= "col-sm-4 col-form-label">Full Name </label>
+            <div class= "col-sm-8">
+              <input type= "text" class= "form-control" id= "name" placeholder= "name">
+            </div>
+          </div>
+          <div class= "form-group row">
+            <label for= "title" class= "col-sm-4 col-form-label">Title</label>
+            <div class= "col-sm-8">
+              <input type= "text" class= "form-control" id= "title">
+            </div>
+          </div>
+          <div class= "form-group row">
+            <label for= "date" class= "col-sm-4 col-form-label">Birthday Date </label>
+            <div class= "col-sm-8">
+              <input type= "date" class= "form-control" id= "date">
+            </div>
+          </div>
+          <div class= "form-group row">
+            <label for= "location" class= "col-sm-4 col-form-label">Location</label>
+            <div class="col-sm-8">
+              <input type= "text" class= "form-control" id= "location">
+            </div>
+          </div>
+          <fieldset class="form-group">
+            <div class= "row">
+              <legend class= "col-form-label col-sm-4 pt-0">Gender</legend>
+              <div class= "col-sm-7">
+                <div class= "form-check">
+                  <input class= "form-check-input" type= "radio" name= "gender" id= "male" value= "Male">
+                  <label class= "form-check-label" for= "male">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class= "form-check-input" type= "radio" name= "gender" id= "female" value= "Female">
+                  <label class= "form-check-label" for= "female">
+                    Female
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="form-group">
+            <div class= "form-group row">
+              <div class= "col-sm-4">Martial Status</div>
+              <div class= "col-sm-7">
+                <div class= "form-check">
+                  <input class= "form-check-input" type= "radio" id= "married" name= "status" value= "Married">
+                  <label class= "form-check-label" for= "married">
+                    Married
+                  </label>
+                </div>
+                <div class= "form-check">
+                  <input class= "form-check-input" type= "radio" id="unmarried" name= "status" value= "Unmarried">
+                  <label class= "form-check-label" for= "unmarried">
+                    Unmarried
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class= "modal-footer">
+        <button type= "button" class= "btn btn-secondary" data-dismiss= "modal">Close</button>
+        <button type= "button" type= "submit" value= "submit" class= "btn btn-primary" onclick= "updateData()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class= "modal fade" id= "updateWorkModal" tabindex= "-1" role= "dialog" aria-labelledby= "workModalLabel" aria-hidden= "true">
+  <div class= "modal-dialog" role= "document">
+    <div class= "modal-content">
+      <div class= "modal-header">
+        <h5 class= "modal-title" id= "workModalLabel">EDIT  DETAILS</h5>
+        <button type= "button" class= "close" data-dismiss= "modal" aria-label= "Close">
+          <span aria-hidden= "true">&times;</span>
+        </button>
+      </div>
+      <div class= "modal-body">
+        <form>
+          <div class= "form-group row">
+            <label for= "occupation" class= "col-sm-4 col-form-label">Occupation </label>
+            <div class= "col-sm-8">
+              <input type= "text" class= "form-control" id= "occupation">
+            </div>
+          </div>
+          <div class= "form-group row">
+            <label for= "skill" class= "col-sm-4 col-form-label">Skill</label>
+            <div class= "col-sm-8">
+              <input type= "text" class= "form-control" id= "skill">
+            </div>
+          </div>
+          <div class= "form-group row">
+            <label for= "job" class= "col-sm-4 col-form-label">Job</label>
+            <div class="col-sm-8">
+              <input type= "text" class= "form-control" id= "job">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class= "modal-footer">
+        <button type= "button" class= "btn btn-secondary" data-dismiss= "modal">Close</button>
+        <button type= "button" type= "submit" value= "submit" class= "btn btn-primary" onclick= "updateData()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src= "index.js"></script>
 </body>
 </html>
