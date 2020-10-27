@@ -1,7 +1,3 @@
-$(document).ready(function() {
-
-})
-
 function isLogout() {
   localStorage.removeItem("email");
   window.location.href = '/login.html';
@@ -13,7 +9,7 @@ function load(e, id) {
     window.location.href = '/login.html';
   }
   var object = {}
-  var getUsersData = JSON.parse(localStorage.getItem("Users"))
+  var getUsersData = JSON.parse(localStorage.getItem("users"))
   var currentUser = localStorage.getItem("email")
   
   $.each(getUsersData, function(key, val) {
@@ -37,7 +33,7 @@ function load(e, id) {
 
 $('#submitForm').on('click', function() {
   if ($("#password1").val() === $("#password2").val()) {
-    var registerData = JSON.parse(localStorage.getItem("Users"));
+    var registerData = JSON.parse(localStorage.getItem("users"));
     var userData = { name : $("#name").val(),
     email: $("#emailLogin").val(),
     password: $("#password1").val(),
@@ -57,7 +53,7 @@ $('#submitForm').on('click', function() {
 
 $('#login').on('click', function() {
   localStorage.removeItem("email");
-  var registerUser = JSON.parse(localStorage.getItem('Users')); 
+  var registerUser = JSON.parse(localStorage.getItem('users')); 
   var logUserEmail = $("#email").val();
   var logUserPassword = $("#password").val();
   console.log(registerUser)
@@ -71,7 +67,7 @@ $('#login').on('click', function() {
 
 function updateData() {
   var currentUser = localStorage.getItem('email');
-  var currentUserData = JSON.parse(localStorage.getItem('Users')); 
+  var currentUserData = JSON.parse(localStorage.getItem('users')); 
   for (var i = 0; i < currentUserData.length; i++) {
     if(currentUser === currentUserData[i].email) { 
       var genderData = $("input:radio[name=gender]:checked").val();
@@ -99,7 +95,7 @@ function updateData() {
 
 function getUserPrevInfo() {
   var currentUser = localStorage.getItem('email');
-  var currentUserData = JSON.parse(localStorage.getItem('Users')); 
+  var currentUserData = JSON.parse(localStorage.getItem('users')); 
   for (var i = 0; i < currentUserData.length; i++) {
     if(currentUser === currentUserData[i].email) {   
       $("#name").val(currentUserData[i].name); 
@@ -119,7 +115,7 @@ function getUserPrevInfo() {
 function addPost() {
   
     var currentUser = localStorage.getItem('email'); 
-    var currentUserData = JSON.parse(localStorage.getItem('Users')); 
+    var currentUserData = JSON.parse(localStorage.getItem('users')); 
     for (var i = 0; i < currentUserData.length; i++) {
       if(currentUser === currentUserData[i].email) { 
         var object = {};
@@ -140,7 +136,7 @@ function addPost() {
 }
 
 function getFriendDetail(getNewfriend) {
-  var currentUserData = JSON.parse(localStorage.getItem('Users')); 
+  var currentUserData = JSON.parse(localStorage.getItem('users')); 
   for (var i = 0; i < currentUserData.length; i++) {
     if(getNewfriend === currentUserData[i].email) {   
      object = {}
@@ -159,7 +155,7 @@ function showfriend() {
   var friend = [];
   var obj = {};
   var currentUser = localStorage.getItem('email');
-  var currentUserData = JSON.parse(localStorage.getItem('Users')); 
+  var currentUserData = JSON.parse(localStorage.getItem('users')); 
   $.each(currentUserData, function(key, val) {
     if (currentUser !== val.email) {
       object = {};
@@ -179,7 +175,7 @@ function showfriend() {
 function addNewFriend(e) {
   var getNewfriend = $(e).attr("id");
   var currentUser = localStorage.getItem("email");
-  var currentUserData = JSON.parse(localStorage.getItem("Users")); 
+  var currentUserData = JSON.parse(localStorage.getItem("users")); 
   for (var i = 0; i < currentUserData.length; i++) {
     if(currentUser === currentUserData[i].email) {   
       if (currentUserData[i].allfriend != null && currentUserData[i].allfriend.includes(getNewfriend)) {
@@ -200,7 +196,7 @@ function addNewFriend(e) {
 
 function countActivity () {
   var currentUser = localStorage.getItem("email");
-  var currentUserData = JSON.parse(localStorage.getItem("Users")); 
+  var currentUserData = JSON.parse(localStorage.getItem("users")); 
   for (var i = 0; i < currentUserData.length; i++) {
     if(currentUser === currentUserData[i].email) {   
       currentUserData[i].activity = (currentUserData[i].post).length;
@@ -211,7 +207,7 @@ function countActivity () {
 
 function addPhoto() {
   var currentUser = localStorage.getItem("email");
-  var currentUserData = JSON.parse(localStorage.getItem("Users")); 
+  var currentUserData = JSON.parse(localStorage.getItem("users")); 
   for (var i = 0; i < currentUserData.length; i++) {
     if(currentUser === currentUserData[i].email) {   
       var imagePath = $("#photo").val();
@@ -227,7 +223,7 @@ function addPhoto() {
 
 function getCurrentUser() {
   var currentUser = localStorage.getItem("email");
-  var currentUserData = JSON.parse(localStorage.getItem("Users")); 
+  var currentUserData = JSON.parse(localStorage.getItem("users")); 
   $.each(currentUserData, function(key, val) {
     if (currentUser === val.email) {
       return (val, currentUser)
